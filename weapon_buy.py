@@ -1,0 +1,79 @@
+
+import pandas as pd
+import matplotlib
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+
+from zplib import data_path
+from valve_keyvalues_python.keyvalues import KeyValues
+
+font_name = fm.FontProperties(fname="C:\\Windows\\Fonts\\malgun.ttf").get_name()
+matplotlib.rc('font', family=font_name)
+
+kv = KeyValues(filename=data_path.stats)
+
+weapon_buydict = kv["statistics"]["weapon_buy"]
+
+grenades_list = ["weapon_hegrenade", "weapon_flashbang", "weapon_smokegrenade",
+            "weapon_molotov", "weapon_incgrenade", "weapon_decoy"]
+
+items_list = ["item_defuser", "item_kevlar", "item_assaultsuit"]
+
+delete_list = items_list + grenades_list
+for i in delete_list:
+    if not (i in weapon_buydict):
+        continue
+    del weapon_buydict[i]
+
+for weapon in weapon_buydict.copy():
+    weapon_buydict[weapon] = int(weapon_buydict[weapon])
+
+df = pd.DataFrame.from_dict(weapon_buydict, orient='index', columns=['count'])
+total = df['count'].sum()
+
+df['percentage'] = df["count"] / total
+
+typedf = pd.DataFrame(columns=['count', 'percentage'])
+
+type_dict = {
+    "Pistol": ["glock", "hkp2000", "usp_silencer", "p250", "fiveseven", "tec9", "deagle", "revolver"],
+    "Shotgun": ["nova", "xm1014", "mag7", "sawedoff"],
+    "SMG": ["mp9", "mac10", "mp7", "ump45", "mp5sd", "p90"],
+    "Rifle": ["galilar", "famas", "ak47", "m4a1", "m4a1_silencer", "sg556", "aug"],
+    "Sniper": ["weapon_ssg08"],
+    "Heavy Rifle": ["m249", "negev"]
+}
+
+for k, v in type_dict.items():
+    typedf.loc[k] = 0.0
+    for weapon in v:
+        name = "weapon_" + weapon
+        if not (name in df.index.tolist()):
+            continue
+        typedf.loc[k] += df.loc["weapon_" + weapon]
+df.index = pd.Index(i.replace("weapon_", "") for i in df.index.tolist())
+
+
+# 무기 구매 비율 통계 계산
+plt.subplot(2, 1, 1)
+plot, texts = plt.pie(df['percentage'], normalize=True, radius=1.3)
+
+# 내림차순 정렬
+labels = ['{0} - {1:.2f}％'.format(x, y * 100.0) for x, y in zip(df.index.tolist(), df['percentage'])]
+plot, labels, dummy = zip(*sorted(zip(plot, labels, df['percentage']), key=lambda x: x[2], reverse=True))
+plt.legend(plot, labels, bbox_to_anchor=(-0.2, 1.0))
+plt.title('무기 구매비율 통계')
+
+
+# 무기 타입 구매비율 계산
+plt.subplot(2, 1, 2)
+plot, texts = plt.pie(typedf['percentage'], normalize=True)
+
+labels = ['{0} - {1:.2f}％'.format(x, y * 100.0) for x, y in zip(typedf.index.tolist(), typedf['percentage'])]
+plot, labels, dummy = zip(*sorted(zip(plot, labels, df['percentage']), key=lambda x: x[2], reverse=True))
+
+plt.title('무기 타입 구매비율 통계')
+plt.legend(plot, labels, bbox_to_anchor=(2.2, 0.9))
+
+
+plt.show()
