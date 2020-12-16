@@ -4,9 +4,12 @@ import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 
+from datetime import datetime
+
 from zplib import data_path
 from valve_keyvalues_python.keyvalues import KeyValues
 
+#한글 글꼴 설정
 font_name = fm.FontProperties(fname="C:\\Windows\\Fonts\\malgun.ttf").get_name()
 matplotlib.rc('font', family=font_name)
 
@@ -69,11 +72,13 @@ plt.title('무기 구매비율 통계')
 plt.subplot(2, 1, 2)
 plot, texts = plt.pie(typedf['percentage'], normalize=True)
 
+# 내림차순 정렬
 labels = ['{0} - {1:.2f}％'.format(x, y * 100.0) for x, y in zip(typedf.index.tolist(), typedf['percentage'])]
 plot, labels, dummy = zip(*sorted(zip(plot, labels, df['percentage']), key=lambda x: x[2], reverse=True))
 
 plt.title('무기 타입 구매비율 통계')
 plt.legend(plot, labels, bbox_to_anchor=(2.2, 0.9))
 
+plt.savefig('export/weapon_buy/result_{0}.png'.format(datetime.now().strftime("%Y%m%d")))
 
 plt.show()
