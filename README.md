@@ -43,3 +43,29 @@
 - 맵별로 보스의 사망률
 - 맵 난이도별 승률
 ```
+<br></br>
+# 4. 데이터 분석 결과
+```
+- 여러 스텟을 다양하게 제공하여 여러 선택을 하게끔 하고 싶었던것이 목표였으나, 의도되지않게 한 스텟에 취중되어 선택하는 게임 메타가 형성됬다는것을 포착.
+- 무기는 타입별로 분류결과 선호도가 매우 높은 무기들이 있다는것을 발견
+```
+## 4.1 스텟
+***
+![image](https://github.com/Zeisenx/ZP4_DataAnalysis/blob/master/export/stet/result_20201203.png)
+<br></br>
+**분석 후 게임 패치 결과**
+<br></br>
+![image](https://github.com/Zeisenx/ZP4_DataAnalysis/blob/master/export/stet/result_20201217.png)
+<br></br>
+## 4.2 무기
+***
+![image](https://github.com/Zeisenx/ZP4_DataAnalysis/blob/master/export/weapon_buy/result_20201217.png)
+![image](https://github.com/Zeisenx/ZP4_DataAnalysis/blob/master/export/weapon_buy/Rifle/result_weapon_buy_Rifle_20201217.png)
+<br></br>
+# 5. 결론
+
+주관적인 유저들의 피드백만을 수집하여 반영하는것보다, 객관적인 데이터와 유저들의 피드백을 적절히 활용하면
+의도하고자 했던 설계에 가까워질 수 있는것을 알수 있었음.
+
+추가적으로 느낀점은, 데이터 분석에 있어서
+데이터에 좌우되지 않고 **데이터가 어떻게 나왔을까에 대한 이해**가 필요하다 생각되었음.
