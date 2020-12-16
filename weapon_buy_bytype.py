@@ -11,7 +11,7 @@ from zplib import data_path
 from valve_keyvalues_python.keyvalues import KeyValues
 
 # 총기 분석타입, Pistol이면 피스톨 통계
-ANALYSIS_TYPE = "Heavy Rifle"
+ANALYSIS_TYPE = "Sniper"
 
 #한글 글꼴 설정
 font_name = fm.FontProperties(fname="C:\\Windows\\Fonts\\malgun.ttf").get_name()
@@ -22,11 +22,11 @@ kv = KeyValues(filename=data_path.stats)
 weapon_buydict = kv["statistics"]["weapon_buy"]
 
 type_dict = {
-    "Pistol": ["glock", "hkp2000", "usp_silencer", "p250", "fiveseven", "tec9", "deagle", "revolver"],
+    "Pistol": ["glock", "hkp2000", "usp_silencer", "p250", "fiveseven", "tec9", "cz75a", "deagle", "revolver"],
     "Shotgun": ["nova", "xm1014", "mag7", "sawedoff"],
     "SMG": ["mp9", "mac10", "mp7", "ump45", "mp5sd", "p90"],
     "Rifle": ["galilar", "famas", "ak47", "m4a1", "m4a1_silencer", "sg556", "aug"],
-    "Sniper": ["weapon_ssg08"],
+    "Sniper": ["ssg08"],
     "Heavy Rifle": ["m249", "negev"]
 }
 

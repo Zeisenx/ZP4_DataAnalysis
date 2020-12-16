@@ -39,11 +39,11 @@ df['percentage'] = df["count"] / total
 typedf = pd.DataFrame(columns=['count', 'percentage'])
 
 type_dict = {
-    "Pistol": ["glock", "hkp2000", "usp_silencer", "p250", "fiveseven", "tec9", "deagle", "revolver"],
+    "Pistol": ["glock", "hkp2000", "usp_silencer", "p250", "fiveseven", "tec9", "cz75a", "deagle", "revolver"],
     "Shotgun": ["nova", "xm1014", "mag7", "sawedoff"],
     "SMG": ["mp9", "mac10", "mp7", "ump45", "mp5sd", "p90"],
     "Rifle": ["galilar", "famas", "ak47", "m4a1", "m4a1_silencer", "sg556", "aug"],
-    "Sniper": ["weapon_ssg08"],
+    "Sniper": ["ssg08"],
     "Heavy Rifle": ["m249", "negev"]
 }
 
