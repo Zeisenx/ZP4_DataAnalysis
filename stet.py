@@ -14,13 +14,17 @@ matplotlib.rc('font', family=font_name)
 pdDataList = []
 stetList = ["health", "power", "speed", "armor"]
 
+print("직업 입력 : ")
+class_input = input().strip()
+
 for kv in zp4.get_players_keyvalues():
     dataList = []
     if not ("stet" in kv):
         continue
 
-    # if not ("class" in kv) or kv["class"] != "supporter":
-    #     continue
+    if class_input:
+        if not ("class" in kv) or kv["class"] != class_input:
+            continue
 
     dataList.append(int(kv["level"]))
     for keyName in stetList:
@@ -47,5 +51,10 @@ plt.scatter(data['level'], data['speed'], c='g', label='민첩')
 plt.xlabel('레벨')
 plt.ylabel('스텟')
 plt.legend()
-plt.savefig('export/stet/result_{0}.png'.format(datetime.now().strftime("%Y%m%d")))
+
+class_format = ""
+if class_input:
+    class_format = "_{0}".format(class_input)
+
+plt.savefig('export/stet/result_{0}{1}.png'.format(datetime.now().strftime("%Y%m%d"), class_format))
 plt.show()
