@@ -47,15 +47,16 @@ type_dict = {
     "Heavy Rifle": ["m249", "negev"]
 }
 
+# 무기 이름이 weapon_이라고 시작하는데, 가독성을 위해 weapon_ 제거
+df.index = pd.Index(i.replace("weapon_", "") for i in df.index.tolist())
+
+# 무기 타입 데이터프레임에 종류별로 기존 데이터프레임의 데이터값을 더하여 추가
 for k, v in type_dict.items():
     typedf.loc[k] = 0.0
     for weapon in v:
-        name = "weapon_" + weapon
-        if not (name in df.index.tolist()):
+        if not (weapon in df.index.tolist()):
             continue
-        typedf.loc[k] += df.loc["weapon_" + weapon]
-df.index = pd.Index(i.replace("weapon_", "") for i in df.index.tolist())
-
+        typedf.loc[k] += df.loc[weapon]
 
 # 무기 구매 비율 통계 계산
 plt.subplot(2, 1, 1)

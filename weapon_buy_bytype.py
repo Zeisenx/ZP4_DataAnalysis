@@ -10,8 +10,9 @@ from datetime import datetime
 from zplib import data_path
 from valve_keyvalues_python.keyvalues import KeyValues
 
-# 총기 분석타입, Pistol이면 피스톨 통계
-ANALYSIS_TYPE = "Sniper"
+# 총기 분석타입(type_dict 키에 맞춰 입력), Pistol이면 피스톨 통계
+print("총기 분석타입 입력 : ")
+ANALYSIS_TYPE = input()
 
 #한글 글꼴 설정
 font_name = fm.FontProperties(fname="C:\\Windows\\Fonts\\malgun.ttf").get_name()
